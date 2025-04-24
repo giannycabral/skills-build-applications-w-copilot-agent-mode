@@ -75,3 +75,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Sufixo do endpoint da API REST do Django para uso no codespace
+CODESPACE_API_SUFFIX = "-8000.app.github.dev"
