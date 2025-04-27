@@ -1,3 +1,126 @@
+/* Paleta de cores escura e vibrante */
+:root {
+  --primary: #22223b;
+  --secondary: #4a4e69;
+  --accent: #9a8c98;
+  --highlight: #f2e9e4;
+  --background: #232136;
+  --card-bg: #2a283e;
+  --text: #f2e9e4;
+  --shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 12px;
+  background: transparent;
+  border-radius: 18px;
+}
+
+/* Navbar escura e moderna */
+.navbar {
+  background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%) !important;
+  border-radius: 18px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow);
+  border: none;
+}
+.navbar-brand {
+  color: var(--accent) !important;
+  font-weight: bold;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px #0006;
+}
+.navbar-nav .nav-link {
+  color: var(--highlight) !important;
+  margin-right: 16px;
+  font-weight: 600;
+  font-size: 1.08rem;
+  border-radius: 8px;
+  padding: 8px 18px;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+  background: var(--accent) !important;
+  color: var(--primary) !important;
+}
+
+/* Títulos */
+h1, h2, h3 {
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* Cards para tabelas */
+.table {
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 32px;
+  color: var(--text);
+}
+.table th {
+  background: var(--secondary);
+  color: var(--highlight);
+  font-weight: 600;
+  border: none;
+}
+.table td {
+  border: none;
+  font-size: 1rem;
+  padding: 12px 8px;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background: #232136cc;
+}
+
+/* Botões modernos */
+button, .btn {
+  background: var(--accent);
+  color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  transition: background 0.2s, color 0.2s;
+}
+button:hover, .btn:hover {
+  background: var(--highlight);
+  color: var(--primary);
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+  .container {
+    padding: 8px 2px;
+  }
+  .table th, .table td {
+    font-size: 0.95rem;
+    padding: 8px 4px;
+  }
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
 .App {
   text-align: center;
 }

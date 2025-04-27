@@ -1,38 +1,54 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Workouts() {
-  const [workouts, setWorkouts] = useState([]);
+function Treinos() {
+  const [treinos, setTreinos] = useState([]);
+  const usuario = localStorage.getItem('usuarioOctofit');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://scaling-invention-5j5w6r4wqxqf4wpq-8000.app.github.dev/api/workouts/')
-      .then(response => response.json())
-      .then(data => setWorkouts(data))
-      .catch(error => console.error('Erro ao buscar workouts:', error));
-  }, []);
+    const todosTreinos = JSON.parse(localStorage.getItem('treinosUsuario')) || [];
+    setTreinos(todosTreinos.filter(t => t.usuario === usuario));
+  }, [usuario]);
+
+  const handleAdicionarTreino = () => {
+    navigate('/nova-atividade');
+  };
 
   return (
     <div>
-      <h1>Workouts</h1>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {workouts.map(workout => (
-            <tr key={workout._id}>
-              <td>{workout._id}</td>
-              <td>{workout.name}</td>
-              <td>{workout.description}</td>
-            </tr>
+      <h2>Meus Treinos</h2>
+      <button
+        onClick={handleAdicionarTreino}
+        style={{
+          background: 'var(--accent)',
+          color: 'var(--primary)',
+          fontWeight: 700,
+          fontSize: '1rem',
+          borderRadius: 10,
+          padding: '10px 24px',
+          marginBottom: 24,
+          border: 'none',
+          cursor: 'pointer',
+          boxShadow: '0 2px 8px #0002'
+        }}
+      >
+        Adicionar novo treino
+      </button>
+      {treinos.length === 0 ? (
+        <p>Nenhum treino registrado ainda.</p>
+      ) : (
+        <ul>
+          {treinos.map((treino, idx) => (
+            <li key={idx}>
+              <strong>{treino.tipo}</strong> - {treino.duracao} min {treino.descricao && `- ${treino.descricao}`} <br />
+              <small>{new Date(treino.data).toLocaleString()}</small>
+            </li>
           ))}
-        </tbody>
-      </table>
+        </ul>
+      )}
     </div>
   );
 }
 
-export default Workouts;
+export default Treinos;

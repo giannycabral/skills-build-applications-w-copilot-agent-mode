@@ -12,7 +12,7 @@ function Leaderboard() {
 
   return (
     <div>
-      <h1>Leaderboard</h1>
+      <h1>Classificação</h1>
       <table className="table table-striped">
         <thead>
           <tr>
