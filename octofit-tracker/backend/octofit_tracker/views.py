@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
 from .models import User, Team, Activity, Leaderboard, Workout
@@ -24,6 +24,20 @@ class UserViewSet(viewsets.ModelViewSet):
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+
+    @action(detail=True, methods=['post'])
+    def add_member(self, request, pk=None):
+        team = self.get_object()
+        username = request.data.get('username')
+        if not username:
+            return Response({'error': 'username é obrigatório'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user = User.objects.get(username=username)
+            team.members.add(user)
+            team.save()
+            return Response({'status': 'membro adicionado'})
+        except User.DoesNotExist:
+            return Response({'error': 'Usuário não encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
 class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
